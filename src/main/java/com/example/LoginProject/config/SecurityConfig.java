@@ -42,8 +42,7 @@ public class SecurityConfig {
 
                         // public APIs
                         .requestMatchers(HttpMethod.POST,
-                                "/api/login",
-                                "/api/register"
+                                "/api/login"
                         ).permitAll()
 
                         .requestMatchers("/api/admin").hasRole("ADMIN")
