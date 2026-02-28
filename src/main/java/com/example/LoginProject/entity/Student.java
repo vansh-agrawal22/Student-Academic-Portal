@@ -15,14 +15,11 @@ public class Student {
     @Id
     private String id;
 
-    private String username;   // link to login account
+    private String username;
     private String fullName;
     private String rollNumber;
     private String department;
     private int semester;
-
     private double cgpa;
     private double attendance;
-
-
 }

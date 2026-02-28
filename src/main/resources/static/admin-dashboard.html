@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="admin-dashboard.css">
+
+</head>
+
+<body>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+    <h2 class="logo">Admin Panel</h2>
+
+    <ul>
+
+        <li>📊 Dashboard</li>
+        <li>👨‍🎓 Students</li>
+        <li>📚 Courses</li>
+        <li>📈 Analytics</li>
+        <li>⚙ Settings</li>
+
+    </ul>
+
+</div>
+
+
+<!-- Main Content -->
+
+<div class="main">
+
+    <div class="topbar">
+
+        <button class="logout-btn" onclick="logout()">Logout</button>
+
+    </div>
+
+
+    <div class="content">
+
+        <div class="add-student-card" onclick="openForm()">
+
+            <div class="plus-icon">+</div>
+
+            <p>Add Student</p>
+
+        </div>
+
+    </div>
+
+</div>
+    <!-- STUDENT FORM MODAL -->
+    <div class="modal" id="studentModal">
+        <div class="modal-content">
+
+            <span class="close-btn" onclick="closeForm()">&times;</span>
+
+            <h2>Create Student</h2>
+
+            <input type="text" id="username" placeholder="Username">
+            <input type="text" id="fullName" placeholder="Full Name">
+            <input type="text" id="rollNumber" placeholder="Roll Number">
+            <input type="text" id="department" placeholder="Department">
+            <input type="number" id="semester" placeholder="Semester">
+            <input type="number" id="cgpa" placeholder="CGPA">
+            <input type="number" id="attendance" placeholder="Attendance">
+            <input type="password" id="tempPassword" placeholder="Temporary Password" required />
+
+            <button onclick="createStudent()">Create</button>
+            <button onclick="closeForm()">Cancel</button>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function logout(){
+    localStorage.clear();
+    window.location.href="login.html";
+    }
+
+</script>
+
+<script src="admin-dashboard.js"></script>
+</body>
+</html>

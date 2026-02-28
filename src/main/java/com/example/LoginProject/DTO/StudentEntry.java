@@ -16,7 +16,7 @@ public class StudentEntry {
         private int semester;
         private double cgpa;
         private double attendance;
-        private String tempPassword;   // 👈 important
+        private String tempPassword;
 
     }
 

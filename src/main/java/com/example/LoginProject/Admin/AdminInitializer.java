@@ -31,7 +31,7 @@ public class AdminInitializer {
 
             loginRepo.save(admin);
 
-            System.out.println("Default Admin Created: vansh / admin123");
+           // System.out.println("Default Admin Created: vansh / admin123");
         }
     }
 }

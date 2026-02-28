@@ -38,6 +38,8 @@ public class JwtValidation extends OncePerRequestFilter {
                 String username = jwtAuthentication.extractUsername(token);
                 String role = jwtAuthentication.extractRole(token);
 
+                System.out.println("ROLE FROM TOKEN: " + role); // DEBUG
+
                 List<GrantedAuthority> authorities =
                         List.of(new SimpleGrantedAuthority("ROLE_" + role));
 
@@ -47,10 +49,13 @@ public class JwtValidation extends OncePerRequestFilter {
                                 null,
                                 authorities
                         );
+
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            } else {
+                System.out.println("TOKEN INVALID ❌");
             }
         }
-
         filterChain.doFilter(request, response);
     }
 }

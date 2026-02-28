@@ -4,11 +4,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+@EnableWebSecurity
 @Configuration
 public class SecurityConfig {
 
@@ -28,27 +30,32 @@ public class SecurityConfig {
                 // authorization rules
                 .authorizeHttpRequests(auth -> auth
 
-                        // public HTML / CSS / JS
+                        // public files
                         .requestMatchers(
                                 "/login.html",
-                                "/register.html",
-                                "/dashboard.html",
                                 "/style.css",
-                                "/app.js",
-                                "/dashboard.css",
-                                "/dashboard.js",
-                                "/favicon.ico"
+                                "/login.js",
+                                "/admin-dashboard.html",
+                                "/admin-dashboard.css",
+                                "/admin-dashboard.js",
+                                "/student-dashboard.html",
+                                "/student-dashboard.css",
+                                "/student-dashboard.js",
+                                "/*.html",
+                                "/*.js",
+                                "/*.css"
                         ).permitAll()
 
-                        // public APIs
-                        .requestMatchers(HttpMethod.POST,
-                                "/api/login"
-                        ).permitAll()
+                        // login API
+                        .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
 
-                        .requestMatchers("/api/admin").hasRole("ADMIN")
-                        // everything else requires JWT
+                        // protected APIs
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/student/**").hasRole("STUDENT")
+
                         .anyRequest().authenticated()
                 )
+
                 // JWT filter
                 .addFilterBefore(jwtValidation, UsernamePasswordAuthenticationFilter.class);
 
