@@ -45,7 +45,8 @@ public class SecurityConfig {
                                 "/api/login"
                         ).permitAll()
 
-                        .requestMatchers("/api/admin").hasRole("ADMIN")
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/student/**").hasRole("STUDENT")
                         // everything else requires JWT
                         .anyRequest().authenticated()
                 )

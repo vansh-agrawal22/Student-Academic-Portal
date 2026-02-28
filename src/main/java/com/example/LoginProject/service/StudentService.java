@@ -7,12 +7,13 @@ import com.example.LoginProject.repository.loginRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Service
 public class StudentService {
 
     @Autowired
-    private StudentRepository studentRepository;
+    private  StudentRepository studentRepository;
 
     @Autowired
     private loginRepo loginRepo;
@@ -41,5 +42,17 @@ public class StudentService {
         student.setAttendance(request.getAttendance());
 
         studentRepository.save(student);
+    }
+
+    public Student getLoggedInStudent() {
+
+        String username = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName();
+
+        return studentRepository
+                .findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
     }
 }
